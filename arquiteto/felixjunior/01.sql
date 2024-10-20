@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS schema_migracao (
+    id SERIAL PRIMARY KEY,
+    nome_arquivo VARCHAR(255) NOT NULL UNIQUE,
+    data_execucao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

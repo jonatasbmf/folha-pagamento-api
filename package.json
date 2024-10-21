@@ -1,13 +1,14 @@
 {
   "name": "folha-pagamento-api",
   "version": "0.0.1",
-  "type": "module",
   "description": "",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
+    "copy-migrations": "copyfiles -u 1 src/arquiteto/migracoes/* dist",
+    "prestart:dev": "npm run copy-migrations",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -19,7 +20,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "postbuild": "cp -r ./src/arquiteto/migracoes ./dist/arquiteto/migracoes"
+    "postbuild": "copyfiles -u 1 src/arquiteto/migracoes/* dist"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -45,11 +46,13 @@
     "@types/supertest": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "jest": "^29.5.0",
     "prettier": "^3.0.0",
+    "prisma": "^5.21.1",
     "source-map-support": "^0.5.21",
     "supertest": "^7.0.0",
     "ts-jest": "^29.1.0",

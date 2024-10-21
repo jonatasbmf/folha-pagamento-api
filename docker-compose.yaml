@@ -14,18 +14,31 @@
         networks:
           - postgres
         restart: unless-stopped
-    
-      pgadmin:
-        image: dpage/pgadmin4
-        environment:
-          PGADMIN_DEFAULT_EMAIL: ${DB_ADMIN_EMAIL}
-          PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD}
+
+      folhapagamento-api:
+        build: 
+          context: .
+          dockerfile: Dockerfile
         ports:
-          - "8081:80"
+          - 3030:3030
         depends_on:
           - postgres
+        environment:
+          - AMBIENTE=dev
         networks:
           - postgres
+    
+      # pgadmin:
+      #   image: dpage/pgadmin4
+      #   environment:
+      #     PGADMIN_DEFAULT_EMAIL: ${DB_ADMIN_EMAIL}
+      #     PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD}
+      #   ports:
+      #     - "8081:80"
+      #   depends_on:
+      #     - postgres
+      #   networks:
+      #     - postgres
     
     networks:
       postgres:

@@ -1,6 +1,7 @@
 {
   "name": "folha-pagamento-api",
   "version": "0.0.1",
+  "type": "module",
   "description": "",
   "author": "",
   "private": true,
@@ -17,7 +18,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "postbuild": "cp -r ./src/arquiteto/migracoes ./dist/arquiteto/migracoes"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -29,7 +31,6 @@
     "@prisma/client": "^5.21.1",
     "dotenv": "^16.4.5",
     "passport": "^0.7.0",
-    "passport-jwt": "^4.0.1",
     "pg": "^8.13.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"

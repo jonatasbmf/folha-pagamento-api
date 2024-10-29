@@ -7,6 +7,18 @@ import { UpdateEmpresaDto } from './dto/update-empresa.dto';
 export class EmpresaService {
   constructor(private readonly prisma: PrismaService) { }
 
+  async findByName(nome: string) {
+    return this.prisma.empresa.findMany({
+      where: {
+        razao_social: {
+          contains: nome,
+          mode: 'insensitive',
+        },
+      },
+    });
+  }
+
+
   async create(createEmpresaDto: CreateEmpresaDto) {
     return this.prisma.empresa.create({
       data: createEmpresaDto,

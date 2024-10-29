@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { CreateEmpresaDto } from './dto/create-empresa.dto';
 import { UpdateEmpresaDto } from './dto/update-empresa.dto';
 import { EmpresaService } from './empresa.service';
@@ -7,10 +7,17 @@ import { EmpresaService } from './empresa.service';
 export class EmpresaController {
   constructor(private readonly empresaService: EmpresaService) { }
 
+  @Get()
+  findByName(@Query('nome') nome: string) {
+    return this.empresaService.findByName(nome);
+  }
+
   @Post()
   create(@Body() createEmpresaDto: CreateEmpresaDto) {
     return this.empresaService.create(createEmpresaDto);
   }
+
+
 
   @Get()
   findAll() {

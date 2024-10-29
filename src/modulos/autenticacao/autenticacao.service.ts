@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ValidaSenhaUsuarioUseCase } from 'src/usuario/userCase/validaSenhaUsuario.usecase';
-import { UsuarioService } from 'src/usuario/usuario.service';
+import { ValidaSenhaUsuarioUseCase } from '../usuario/userCase/validaSenhaUsuario.usecase';
+import { UsuarioService } from '../usuario/usuario.service';
 
 @Injectable()
 export class AutenticacaoService {

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { FuncionarioService } from 'src/funcionario/funcionario.service';
+import { FuncionarioService } from 'src/modulos/funcionario/funcionario.service';
 import { CalcularINSSUseCase } from './userCase/calcularINSS.usercase';
 import { CalcularIRRFUseCase } from './userCase/calcularIRRF.usercase';
 

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { FuncionarioModule } from 'src/funcionario/funcionario.module';
+import { FuncionarioModule } from 'src/modulos/funcionario/funcionario.module';
 import { FolhaPagamentoController } from './folha-pagamento.controller';
 import { FolhaPagamentoService } from './folha-pagamento.service';
 import { CalcularINSSUseCase } from './userCase/calcularINSS.usercase';

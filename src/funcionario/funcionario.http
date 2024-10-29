@@ -1,0 +1,27 @@
+### Create a new Funcionario
+POST http://localhost:4001/funcionario
+Content-Type: application/json
+
+{
+    "nome": "'Jane Doe",
+    "salario": 5000,
+    "empresaId": 1
+}
+
+### Get all Funcionarios
+GET http://localhost:4001/funcionario
+
+### Get a single Funcionario by ID
+GET http://localhost:4001/funcionario/1
+
+### Update a Funcionario by ID
+PATCH http://localhost:4001/funcionario/1
+Content-Type: application/json
+
+{
+    "nome": "Jane Doe",
+    "salario": 5000
+}
+
+### Delete a Funcionario by ID
+DELETE http://localhost:3000/funcionario/1

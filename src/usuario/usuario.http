@@ -1,0 +1,36 @@
+### Create a new user
+POST http://localhost:4001/usuario
+Content-Type: application/json
+
+{
+    "email": "example@example.com",
+    "name": "Example Name",
+    "senha": "examplepassword"
+}
+
+###
+
+### Get all users
+GET http://localhost:4001/usuario
+
+###
+
+### Get a user by ID
+GET http://localhost:4001/usuario/3
+
+###
+
+### Update a user by ID
+PATCH http://localhost:4001/usuario/3
+Content-Type: application/json
+
+{
+    "email": "newemail@example.com",
+    "name": "New Name",
+    "senha": "newpassword"
+}
+
+###
+
+### Delete a user by ID
+DELETE /usuario/1

@@ -1,51 +1,36 @@
-    version: '3.5'
-    
-    services:
-      postgres:
-        image: postgres:latest
-        environment:
-          POSTGRES_USER: ${DB_USERNAME}
-          POSTGRES_PASSWORD: ${DB_PASSWORD}
-          POSTGRES_DB: ${DB_NAME}
-        volumes:
-          - postgres:/var/lib/postgresql/data
-        ports:
-          - "6432:5432"
-        networks:
-          - postgres
-        restart: unless-stopped
+version: '3.9'
 
-      folhapagamento-api:
-        build: 
-          context: .
-          dockerfile: Dockerfile
-        ports:
-          - 3030:3030
-        depends_on:
-          - postgres
-        environment:
-          - AMBIENTE=dev
-        networks:
-          - postgres
-    
-      # pgadmin:
-      #   image: dpage/pgadmin4
-      #   environment:
-      #     PGADMIN_DEFAULT_EMAIL: ${DB_ADMIN_EMAIL}
-      #     PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD}
-      #   ports:
-      #     - "8081:80"
-      #   depends_on:
-      #     - postgres
-      #   networks:
-      #     - postgres
-    
-    networks:
-      postgres:
-        driver: bridge
-    
+services:
+  banco:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     volumes:
-        postgres:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
 
-### docker-compose up -d 
-### Com comando acima executamos esse arquivo e subimos o banco e o pgadmin
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgres://${DB_USERNAME}:${DB_PASSWORD}@banco:5432/${DB_NAME}
+    depends_on:
+      - banco
+    ports:
+      - "4000:4000"
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:

@@ -1,0 +1,4 @@
+### Obter uma folha de pagamento específica
+GET http://localhost:4001/folha-pagamento/1
+Accept: application/json
+

@@ -1,6 +1,12 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
-  provider = "prisma-client-js"
-  binaryTargets = ["native", "windows", "linux-musl-openssl-3.0.x"]
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -8,9 +14,43 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model usuarios {
-  nome       String  @db.VarChar
-  email      String? @db.VarChar
-  senha      String? @db.VarChar
-  usuario_id BigInt  @id(map: "usuarios_pk") @default(autoincrement())
+model Usuario {
+  id    Int    @id @default(autoincrement())
+  email String @unique @db.VarChar(150)
+  name  String @db.VarChar(150)
+  senha String @db.VarChar(255)
+  salt  String @db.VarChar(255)
+}
+
+model AliquotasINSS {
+  id        Int      @id @default(autoincrement())
+  ano       Int
+  faixa_min Decimal  @db.Decimal(12, 2)
+  faixa_max Decimal? @db.Decimal(12, 2)
+  aliquota  Decimal  @db.Decimal(12, 2)
+}
+
+model AliquotasIRRF {
+  id        Int      @id @default(autoincrement())
+  ano       Int
+  faixa_min Decimal  @db.Decimal(12, 2)
+  faixa_max Decimal? @db.Decimal(12, 2)
+  aliquota  Decimal  @db.Decimal(12, 2)
+  deducao   Decimal  @db.Decimal(12, 2)
+}
+
+model Empresa {
+  id           Int           @id @default(autoincrement())
+  nome         String        @db.VarChar(150)
+  razao_social String        @db.VarChar(150)
+  email        String        @db.VarChar(150)
+  funcionarios Funcionario[]
+}
+
+model Funcionario {
+  id        Int     @id @default(autoincrement())
+  nome      String  @db.VarChar(150)
+  salario   Decimal @db.Decimal(12, 2)
+  empresaId Int
+  empresa   Empresa @relation(fields: [empresaId], references: [id])
 }

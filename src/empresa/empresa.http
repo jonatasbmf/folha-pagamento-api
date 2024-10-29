@@ -1,0 +1,36 @@
+# Create a new Empresa
+POST http://localhost:4001/empresa
+Content-Type: application/json
+
+{
+    "nome": "Empresa 2",
+    "razao_social": "Empresa 2 LTDA",
+    "email": "exemplo2@empresa.com"
+}
+
+### 
+
+# Get all Empresas
+GET http://localhost:4001/empresa
+
+###
+
+# Get a single Empresa by ID
+GET http://localhost:4001/empresa/1
+
+###
+
+# Update an existing Empresa by ID
+PATCH http://localhost:4001/empresa/1
+Content-Type: application/json
+
+{
+    "nome": "Primeira empresa",
+    "razao_social": "Primeira empresa LTDA",
+    "email": "primeira@empresa.com"
+}
+
+###
+
+# Delete an Empresa by ID
+DELETE http://localhost:4001/empresa/1

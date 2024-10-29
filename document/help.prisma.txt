@@ -1,0 +1,45 @@
+**
+ * # Prisma Commands Reference
+ *
+ * ## Initialize Prisma
+ * Initializes Prisma in your project by creating a `prisma` directory with a `schema.prisma` file.
+ * ```sh
+ * npx prisma init
+ * ```
+ *
+ * ## Generate Prisma Client
+ * Generates the Prisma Client based on your schema. Run this command after making changes to your `schema.prisma` file.
+ * ```sh
+ * npx prisma generate
+ * ```
+ *
+ * ## Create a Migration
+ * Creates a new migration based on the changes in your `schema.prisma` file. This command will prompt you to name the migration.
+ * ```sh
+ * npx prisma migrate dev --name <migration_name>
+ * ```
+ *
+ * ## Apply Migrations
+ * Applies all pending migrations to the database.
+ * ```sh
+ * npx prisma migrate deploy
+ * ```
+ *
+ * ## Reset the Database
+ * Resets the database and applies all migrations from scratch.
+ * ```sh
+ * npx prisma migrate reset
+ * ```
+ *
+ * ## Check for Potential Issues
+ * Checks your Prisma schema for potential issues.
+ * ```sh
+ * npx prisma validate
+ * ```
+ *
+ * ## Open Prisma Studio
+ * Opens Prisma Studio, a GUI for viewing and editing data in your database.
+ * ```sh
+ * npx prisma studio
+ * ```
+ */

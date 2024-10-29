@@ -10,7 +10,7 @@ export class AutenticacaoService {
     async login(email: string, senha: string): Promise<string> {
         var usuario = await this.usuario.findForEmail(email);
 
-        if (usuario == null || usuario == undefined || this.validaSenhaUsuario.execute(senha, usuario.senha, usuario.salt))
+        if ((usuario == null || usuario == undefined) || !this.validaSenhaUsuario.execute(senha, usuario.senha))
             throw "E-mail ou senha inválido!"
 
 

@@ -5,13 +5,14 @@ import * as bcrypt from 'bcrypt';
 export class ValidaSenhaUsuarioUseCase {
     constructor() { }
 
-    execute(senhaInformada: string, senha: string) {
+    async execute(senhaInformada: string, senha: string): Promise<boolean> {
         try {
-            const isMatch = bcrypt.compare(senhaInformada, senha);
+            const isMatch = await bcrypt.compare(senhaInformada, senha);
             return isMatch;
         } catch (error) {
             console.error('Erro ao comparar senhas:', error);
             throw new InternalServerErrorException('Erro ao validar a senha do usuário');
         }
     }
+
 }

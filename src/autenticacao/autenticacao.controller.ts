@@ -7,7 +7,11 @@ export class AutenticacaoController {
   constructor(private readonly autenticacaoService: AutenticacaoService) { }
 
   @Post('login')
-  async autentica(@Body() { email, senha }: AutenticacaoDTO): Promise<string> {
-    return await this.autenticacaoService.login(email, senha);
+  async autentica(@Body() { email, senha }: AutenticacaoDTO) {
+    try {
+      return await this.autenticacaoService.login(email, senha);
+    } catch (error) {
+      return "E-mail ou senha inválidos!"
+    }
   }
 }

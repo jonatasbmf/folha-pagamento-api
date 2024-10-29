@@ -1,0 +1,8 @@
+### Create a new user
+POST http://localhost:4001/autenticacao/login
+Content-Type: application/json
+
+{
+    "email": "sysadmin@sistema.com",
+    "senha": "P@assw0rd"
+}

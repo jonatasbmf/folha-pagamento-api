@@ -27,6 +27,12 @@ export class UsuarioService {
     });
   }
 
+  async findForEmail(email: string) {
+    return this.prisma.usuario.findUnique({
+      where: { email },
+    });
+  }
+
   async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
     return this.updateUsuarioUseCase.execute(id, updateUsuarioDto);
   }

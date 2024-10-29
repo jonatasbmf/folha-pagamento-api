@@ -3,9 +3,9 @@ POST http://localhost:4001/usuario
 Content-Type: application/json
 
 {
-    "email": "example@example.com",
-    "name": "Example Name",
-    "senha": "examplepassword"
+    "email": "sysadmin@sistema.com",
+    "name": "Administrador do Sistema",
+    "senha": "P@assw0rd"
 }
 
 ###

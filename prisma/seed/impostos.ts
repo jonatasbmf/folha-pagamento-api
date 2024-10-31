@@ -3,6 +3,13 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
+    const existeDados = await prisma.aliquotasINSS.findFirst();
+
+    if (existeDados) {
+        console.log("Já foram encontrados os dados, não é necessario o preenchimento!")
+        return;
+    }
+
     await prisma.aliquotasINSS.createMany({
         data: [
             { ano: 2024, faixa_min: 0, faixa_max: 1320, aliquota: 7.5 },
@@ -21,6 +28,18 @@ async function main() {
             { ano: 2024, faixa_min: 4664.69, faixa_max: null, aliquota: 27.5, deducao: 884.96 },
         ],
     });
+
+    await prisma.usuario.create(
+        {
+            data: {
+                email: "sysadmin@sistema.com",
+                name: "Administrador do Sistema",
+                senha: "$2b$10$ssHVEl9s1VRj0KldcWPdcuOctVa9naXpECgX2P7xqY2EacTNOqZ.u",
+                salt: "$2b$10$ssHVEl9s1VRj0KldcWPdcu",
+
+            },
+        }
+    );
 }
 
 main()

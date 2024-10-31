@@ -19,6 +19,18 @@ export class FuncionarioService {
     });
   }
 
+  async findByName(nome: string) {
+    return await this.prisma.funcionario.findMany({
+      where: {
+        nome: {
+          contains: nome,
+          mode: 'insensitive',
+
+        },
+      },
+    });
+  }
+
   async findOne(id: number) {
     return this.prisma.funcionario.findUnique({
       where: { id },

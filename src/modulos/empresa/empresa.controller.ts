@@ -17,8 +17,6 @@ export class EmpresaController {
     return this.empresaService.create(createEmpresaDto);
   }
 
-
-
   @Get()
   findAll() {
     return this.empresaService.findAll();

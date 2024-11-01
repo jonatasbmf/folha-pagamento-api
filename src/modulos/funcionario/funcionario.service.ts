@@ -28,10 +28,11 @@ export class FuncionarioService {
 
         },
       },
+      include: { empresa: true },
     });
   }
 
-  async findOne(id: number) {
+  async findById(id: number) {
     return this.prisma.funcionario.findUnique({
       where: { id },
       include: { empresa: true },

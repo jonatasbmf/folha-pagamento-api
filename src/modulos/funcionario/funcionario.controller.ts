@@ -8,32 +8,32 @@ export class FuncionarioController {
   constructor(private readonly funcionarioService: FuncionarioService) { }
 
   @Post()
-  create(@Body() createFuncionarioDto: CreateFuncionarioDto) {
-    return this.funcionarioService.create(createFuncionarioDto);
+  async create(@Body() createFuncionarioDto: CreateFuncionarioDto) {
+    return await this.funcionarioService.create(createFuncionarioDto);
   }
 
-  @Get(':nome')
-  findByName(@Query('nome') nome: string) {
-    return this.funcionarioService.findByName(nome);
+  @Get('buscar/nome')
+  async findByName(@Query('nome') nome: string) {
+    return await this.funcionarioService.findByName(nome);
+  }
+
+  @Get('buscar/id/:id')
+  async findOne(@Param('id') id: string) {
+    return await this.funcionarioService.findById(+id)
   }
 
   @Get()
-  findAll() {
-    return this.funcionarioService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.funcionarioService.findOne(+id);
+  async findAll() {
+    return await this.funcionarioService.findAll();
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFuncionarioDto: UpdateFuncionarioDto) {
-    return this.funcionarioService.update(+id, updateFuncionarioDto);
+  async update(@Param('id') id: string, @Body() updateFuncionarioDto: UpdateFuncionarioDto) {
+    return await this.funcionarioService.update(+id, updateFuncionarioDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.funcionarioService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.funcionarioService.remove(+id);
   }
 }

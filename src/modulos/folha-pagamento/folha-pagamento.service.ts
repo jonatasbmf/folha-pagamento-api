@@ -12,7 +12,7 @@ export class FolhaPagamentoService {
     ) { }
 
     async calcularFolhaPagamento(idFuncionario: string) {
-        var funcionario = await this.funcionarioService.findOne(+idFuncionario);
+        var funcionario = await this.funcionarioService.findById(+idFuncionario);
         var salario = +funcionario.salario;
         var nome = funcionario.nome;
 

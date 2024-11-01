@@ -12,7 +12,10 @@ Content-Type: application/json
 GET http://localhost:4001/funcionario
 
 ### Get a single Funcionario by ID
-GET http://localhost:4001/funcionario/1
+GET http://localhost:4001/funcionario/buscar/id/2
+
+### Get a single Funcionario by name
+GET http://localhost:4001/funcionario/buscar/nome?nome=Jonatas
 
 ### Update a Funcionario by ID
 PATCH http://localhost:4001/funcionario/1

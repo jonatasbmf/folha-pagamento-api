@@ -6,7 +6,7 @@ export class CalcularINSSUseCase {
     constructor(private readonly prisma: PrismaService) { }
 
     async calcularINSS(salario: number, ano: number): Promise<number> {
-        const aliquotas = await this.prisma.aliquotasINSS.findMany({ where: { ano } });
+        const aliquotas = await this.prisma.aliquotasInss.findMany({ where: { ano } });
         let inss = 0;
         for (const aliquota of aliquotas) {
             if (salario > +aliquota.faixa_max) {

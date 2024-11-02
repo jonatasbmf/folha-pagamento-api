@@ -3,14 +3,14 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-    const existeDados = await prisma.aliquotasINSS.findFirst();
+    const existeDados = await prisma.aliquotasInss.findFirst();
 
     if (existeDados) {
         console.log("Já foram encontrados os dados, não é necessario o preenchimento!")
         return;
     }
 
-    await prisma.aliquotasINSS.createMany({
+    await prisma.aliquotasInss.createMany({
         data: [
             { ano: 2024, faixa_min: 0, faixa_max: 1320, aliquota: 7.5 },
             { ano: 2024, faixa_min: 1320.01, faixa_max: 2571.29, aliquota: 9 },
@@ -19,7 +19,7 @@ async function main() {
         ],
     });
 
-    await prisma.aliquotasIRRF.createMany({
+    await prisma.aliquotasIrrf.createMany({
         data: [
             { ano: 2024, faixa_min: 0, faixa_max: 2112, aliquota: 0, deducao: 0 },
             { ano: 2024, faixa_min: 2112.01, faixa_max: 2826.65, aliquota: 7.5, deducao: 158.40 },

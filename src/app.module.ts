@@ -13,7 +13,8 @@ import { PrismaModule } from './prisma/prisma.module';
     FolhaPagamentoModule, AutenticacaoModule,
     ConfigModule.forRoot({
       isGlobal: true,
-    }),],
+    }),
+  ],
   controllers: [],
   providers: [],
 })

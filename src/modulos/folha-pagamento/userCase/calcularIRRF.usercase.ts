@@ -7,7 +7,7 @@ export class CalcularIRRFUseCase {
 
     async calcularIRRF(salario: number, inss: number, ano: number): Promise<number> {
         const baseCalculo = salario - inss;
-        const aliquotas = await this.prisma.aliquotasIRRF.findMany({ where: { ano } });
+        const aliquotas = await this.prisma.aliquotasIrrf.findMany({ where: { ano } });
 
         let irrf = 0;
 

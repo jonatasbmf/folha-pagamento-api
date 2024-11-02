@@ -1,7 +1,7 @@
 export class Inss {
-    id: number;
+    id?: number;
     ano: number;
-    faixa_min: number;
-    faixa_max: number;
+    faixaMin: number;
+    faixaMax: number;
     aliquota: number;
 }

@@ -8,9 +8,11 @@ export class FuncionarioService {
   constructor(private readonly prisma: PrismaService) { }
 
   async create(createFuncionarioDto: CreateFuncionarioDto) {
-    return this.prisma.funcionario.create({
-      data: createFuncionarioDto,
-    });
+    return this.prisma.funcionario.create(
+      {
+        data: createFuncionarioDto,
+      }
+    );
   }
 
   async findAll() {

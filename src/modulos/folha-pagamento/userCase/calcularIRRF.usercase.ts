@@ -12,8 +12,8 @@ export class CalcularIRRFUseCase {
         let irrf = 0;
 
         for (const aliquota of aliquotas) {
-            const faixaMax = Number(aliquota.faixa_max);
-            const faixaMin = Number(aliquota.faixa_min);
+            const faixaMax = Number(aliquota.faixaMax);
+            const faixaMin = Number(aliquota.faixaMin);
             const aliquotaPercentual = Number(aliquota.aliquota) / 100;
             const deducao = Number(aliquota.deducao);
 

@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+
 import { CreateInssDto } from './dto/create-inss.dto';
 import { UpdateInssDto } from './dto/update-inss.dto';
 import { InssService } from './inss.service';

@@ -9,10 +9,10 @@ export class CalcularINSSUseCase {
         const aliquotas = await this.prisma.aliquotasInss.findMany({ where: { ano } });
         let inss = 0;
         for (const aliquota of aliquotas) {
-            if (salario > +aliquota.faixa_max) {
-                inss += (+aliquota.faixa_max - +aliquota.faixa_min) * (+aliquota.aliquota / 100);
+            if (salario > +aliquota.faixaMax) {
+                inss += (+aliquota.faixaMax - +aliquota.faixaMin) * (+aliquota.aliquota / 100);
             } else {
-                inss += (salario - +aliquota.faixa_min) * (+aliquota.aliquota / 100);
+                inss += (salario - +aliquota.faixaMin) * (+aliquota.aliquota / 100);
                 break;
             }
         }

@@ -8,7 +8,11 @@ export class InssService {
   constructor(private readonly prisma: PrismaService) { }
 
   async create(createInssDto: CreateInssDto) {
-    return await this.prisma.aliquotasInss.create({ data: createInssDto });
+    return await this.prisma.aliquotasInss.create(
+      {
+        data: createInssDto,
+      }
+    );
   }
 
   async findAll() {
@@ -23,10 +27,10 @@ export class InssService {
     return await this.prisma.aliquotasInss.findMany({ where: { ano }, });
   }
 
-  async update(id: number, updateInssDto: UpdateInssDto) {
+  async update(id: number, inssDto: UpdateInssDto) {
     return await this.prisma.aliquotasInss.update({
       where: { id },
-      data: updateInssDto,
+      data: inssDto,
     });
   }
 

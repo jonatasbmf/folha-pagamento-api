@@ -1,26 +1,46 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateInssDto } from './dto/create-inss.dto';
 import { UpdateInssDto } from './dto/update-inss.dto';
 
 @Injectable()
 export class InssService {
-  create(createInssDto: CreateInssDto) {
-    return 'This action adds a new inss';
+  constructor(private readonly prisma: PrismaService) { }
+
+  async create(createInssDto: CreateInssDto) {
+    return await this.prisma.aliquotasInss.create({ data: createInssDto });
   }
 
-  findAll() {
-    return `This action returns all inss`;
+  async findAll() {
+    return await this.prisma.aliquotasInss.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} inss`;
+  async findOne(id: number) {
+    return await this.prisma.aliquotasInss.findUnique({ where: { id }, });
   }
 
-  update(id: number, updateInssDto: UpdateInssDto) {
-    return `This action updates a #${id} inss`;
+  async findByYear(ano: number) {
+    return await this.prisma.aliquotasInss.findMany({ where: { ano }, });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} inss`;
+  async update(id: number, updateInssDto: UpdateInssDto) {
+    return await this.prisma.aliquotasInss.update({
+      where: { id },
+      data: updateInssDto,
+    });
+  }
+
+  async remove(id: number) {
+    return await this.prisma.aliquotasInss.delete({
+      where: { id },
+    });
+  }
+
+  async findDistinctYears() {
+    const result = await this.prisma.aliquotasInss.findMany({
+      distinct: ['ano'],
+      select: { ano: true },
+    });
+    return result;
   }
 }

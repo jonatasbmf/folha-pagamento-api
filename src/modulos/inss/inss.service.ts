@@ -20,11 +20,15 @@ export class InssService {
   }
 
   async findOne(id: number) {
-    return await this.prisma.aliquotasInss.findUnique({ where: { id }, });
+    return await this.prisma.aliquotasInss.findUnique({
+      where: { id },
+    });
   }
 
   async findByYear(ano: number) {
-    return await this.prisma.aliquotasInss.findMany({ where: { ano }, });
+    return await this.prisma.aliquotasInss.findMany({
+      where: { ano },
+    });
   }
 
   async update(id: number, inssDto: UpdateInssDto) {

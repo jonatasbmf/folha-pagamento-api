@@ -1,19 +1,19 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
 } from '@nestjs/common';
-import { GrupoUsuarioService } from './grupo-usuario.service';
 import { CreateGrupoUsuarioDto } from './dto/create-grupo-usuario.dto';
 import { UpdateGrupoUsuarioDto } from './dto/update-grupo-usuario.dto';
+import { GrupoUsuarioService } from './grupo-usuario.service';
 
 @Controller('grupo-usuario')
 export class GrupoUsuarioController {
-  constructor(private readonly grupoUsuarioService: GrupoUsuarioService) {}
+  constructor(private readonly grupoUsuarioService: GrupoUsuarioService) { }
 
   @Post()
   create(@Body() createGrupoUsuarioDto: CreateGrupoUsuarioDto) {
@@ -28,6 +28,11 @@ export class GrupoUsuarioController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.grupoUsuarioService.findOne(+id);
+  }
+
+  @Get('buscar/:nome')
+  buscarPorNome(@Param('nome') nome: string) {
+    return this.grupoUsuarioService.buscarPorNome(nome);
   }
 
   @Patch(':id')

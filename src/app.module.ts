@@ -16,15 +16,15 @@ import { PrismaModule } from './prisma/prisma.module';
   imports: [
     PrismaModule,
     EmpresaModule,
+    PermissaoModule,
     GrupoUsuarioModule,
     GrupousuarioPermissaoModule,
-    FuncionarioModule,
     UsuarioModule,
+    FuncionarioModule,
     InssModule,
     IrrfModule,
     FolhaPagamentoModule,
     AutenticacaoModule,
-    PermissaoModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -32,4 +32,4 @@ import { PrismaModule } from './prisma/prisma.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }

@@ -5,14 +5,12 @@ import { UpdateFuncionarioDto } from './dto/update-funcionario.dto';
 
 @Injectable()
 export class FuncionarioService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(createFuncionarioDto: CreateFuncionarioDto) {
-    return this.prisma.funcionario.create(
-      {
-        data: createFuncionarioDto,
-      }
-    );
+    return this.prisma.funcionario.create({
+      data: createFuncionarioDto,
+    });
   }
 
   async findAll() {
@@ -27,7 +25,6 @@ export class FuncionarioService {
         nome: {
           contains: nome,
           mode: 'insensitive',
-
         },
       },
       include: { empresa: true },

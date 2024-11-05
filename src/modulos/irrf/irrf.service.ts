@@ -5,11 +5,11 @@ import { UpdateIrrfDto } from './dto/update-irrf.dto';
 
 @Injectable()
 export class IrrfService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async findByYear(ano: number) {
     return await this.prisma.aliquotasIrrf.findMany({
-      where: { ano }
+      where: { ano },
     });
   }
 
@@ -33,20 +33,20 @@ export class IrrfService {
 
   async findOne(id: number) {
     return await this.prisma.aliquotasIrrf.findUnique({
-      where: { id }
+      where: { id },
     });
   }
 
   async update(id: number, updateIrrfDto: UpdateIrrfDto) {
     return await this.prisma.aliquotasIrrf.update({
       where: { id },
-      data: updateIrrfDto
+      data: updateIrrfDto,
     });
   }
 
   async remove(id: number) {
     return await this.prisma.aliquotasIrrf.delete({
-      where: { id }
+      where: { id },
     });
   }
 }

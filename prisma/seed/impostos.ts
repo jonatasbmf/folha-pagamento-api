@@ -36,7 +36,7 @@ async function main() {
                 name: "Administrador do Sistema",
                 senha: "$2b$10$ssHVEl9s1VRj0KldcWPdcuOctVa9naXpECgX2P7xqY2EacTNOqZ.u",
                 salt: "$2b$10$ssHVEl9s1VRj0KldcWPdcu",
-
+                grupousuarioId: null
             },
         }
     );

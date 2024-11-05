@@ -4,15 +4,27 @@ import { AutenticacaoModule } from './modulos/autenticacao/autenticacao.module';
 import { EmpresaModule } from './modulos/empresa/empresa.module';
 import { FolhaPagamentoModule } from './modulos/folha-pagamento/folha-pagamento.module';
 import { FuncionarioModule } from './modulos/funcionario/funcionario.module';
+import { GrupoUsuarioModule } from './modulos/grupo-usuario/grupo-usuario.module';
+import { GrupousuarioPermissaoModule } from './modulos/grupousuario_permissao/grupousuario_permissao.module';
 import { InssModule } from './modulos/inss/inss.module';
 import { IrrfModule } from './modulos/irrf/irrf.module';
+import { PermissaoModule } from './modulos/permissao/permissao.module';
 import { UsuarioModule } from './modulos/usuario/usuario.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
-  imports: [PrismaModule, EmpresaModule,
-    FuncionarioModule, UsuarioModule, InssModule, IrrfModule,
-    FolhaPagamentoModule, AutenticacaoModule,
+  imports: [
+    PrismaModule,
+    EmpresaModule,
+    GrupoUsuarioModule,
+    GrupousuarioPermissaoModule,
+    FuncionarioModule,
+    UsuarioModule,
+    InssModule,
+    IrrfModule,
+    FolhaPagamentoModule,
+    AutenticacaoModule,
+    PermissaoModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -20,4 +32,4 @@ import { PrismaModule } from './prisma/prisma.module';
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}

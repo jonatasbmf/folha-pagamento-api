@@ -1,5 +1,5 @@
 export class CreateFuncionarioDto {
-    nome: string;
-    salario: number;
-    empresaId: number;
+  nome: string;
+  salario: number;
+  empresaId: number;
 }

@@ -15,11 +15,13 @@ datasource db {
 }
 
 model usuario {
-  id    Int    @id @default(autoincrement())
-  email String @unique @db.VarChar(150)
-  name  String @db.VarChar(150)
-  senha String @db.VarChar(255)
-  salt  String @db.VarChar(255)
+  id             Int           @id @default(autoincrement())
+  email          String        @unique @db.VarChar(150)
+  name           String        @db.VarChar(150)
+  senha          String        @db.VarChar(255)
+  salt           String        @db.VarChar(255)
+  grupousuarioId Int?
+  grupoUsuario   grupoUsuario? @relation(fields: [grupousuarioId], references: [id])
 }
 
 model aliquotasInss {
@@ -42,7 +44,7 @@ model aliquotasIrrf {
 model empresa {
   id           Int           @id @default(autoincrement())
   nome         String        @db.VarChar(150)
-  razao_social String        @db.VarChar(150)
+  razaoSocial  String        @map("razao_social") @db.VarChar(150)
   email        String        @db.VarChar(150)
   funcionarios funcionario[]
 }
@@ -53,4 +55,33 @@ model funcionario {
   salario   Decimal @db.Decimal(12, 2)
   empresaId Int
   empresa   empresa @relation(fields: [empresaId], references: [id])
+}
+
+model grupoUsuario {
+  id        Int    @id @default(autoincrement())
+  nome      String @db.VarChar(150)
+  descricao String @db.VarChar(150)
+
+  grupoUsuarioPermissao grupoUsuarioPermissao[]
+  usuario               usuario[]
+
+  @@map("grupo_usuario")
+}
+
+model permissao {
+  id        Int    @id @default(autoincrement())
+  nome      String @db.VarChar(150)
+  descricao String @db.VarChar(150)
+
+  grupoUsuarioPermissao grupoUsuarioPermissao[]
+}
+
+model grupoUsuarioPermissao {
+  id             Int          @id @default(autoincrement())
+  permissaoId    Int
+  permissao      permissao    @relation(fields: [permissaoId], references: [id])
+  grupousuarioId Int
+  grupoUsuario   grupoUsuario @relation(fields: [grupousuarioId], references: [id])
+
+  @@map("grupo_usuario_permisao")
 }

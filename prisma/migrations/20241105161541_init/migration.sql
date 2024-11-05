@@ -1,31 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `AliquotasINSS` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `AliquotasIRRF` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Empresa` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Funcionario` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Usuario` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropForeignKey
-ALTER TABLE "Funcionario" DROP CONSTRAINT "Funcionario_empresaId_fkey";
-
--- DropTable
-DROP TABLE "AliquotasINSS";
-
--- DropTable
-DROP TABLE "AliquotasIRRF";
-
--- DropTable
-DROP TABLE "Empresa";
-
--- DropTable
-DROP TABLE "Funcionario";
-
--- DropTable
-DROP TABLE "Usuario";
-
 -- CreateTable
 CREATE TABLE "usuario" (
     "id" SERIAL NOT NULL,
@@ -33,6 +5,7 @@ CREATE TABLE "usuario" (
     "name" VARCHAR(150) NOT NULL,
     "senha" VARCHAR(255) NOT NULL,
     "salt" VARCHAR(255) NOT NULL,
+    "grupousuarioId" INTEGER NOT NULL,
 
     CONSTRAINT "usuario_pkey" PRIMARY KEY ("id")
 );
@@ -80,8 +53,44 @@ CREATE TABLE "funcionario" (
     CONSTRAINT "funcionario_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "grupo_usuario" (
+    "id" SERIAL NOT NULL,
+    "nome" VARCHAR(150) NOT NULL,
+    "descricao" VARCHAR(150) NOT NULL,
+
+    CONSTRAINT "grupo_usuario_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "permissao" (
+    "id" SERIAL NOT NULL,
+    "nome" VARCHAR(150) NOT NULL,
+    "descricao" VARCHAR(150) NOT NULL,
+
+    CONSTRAINT "permissao_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "grupo_usuario_permisao" (
+    "id" SERIAL NOT NULL,
+    "permissaoId" INTEGER NOT NULL,
+    "grupousuarioId" INTEGER NOT NULL,
+
+    CONSTRAINT "grupo_usuario_permisao_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "usuario_email_key" ON "usuario"("email");
 
 -- AddForeignKey
+ALTER TABLE "usuario" ADD CONSTRAINT "usuario_grupousuarioId_fkey" FOREIGN KEY ("grupousuarioId") REFERENCES "grupo_usuario"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "funcionario" ADD CONSTRAINT "funcionario_empresaId_fkey" FOREIGN KEY ("empresaId") REFERENCES "empresa"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "grupo_usuario_permisao" ADD CONSTRAINT "grupo_usuario_permisao_permissaoId_fkey" FOREIGN KEY ("permissaoId") REFERENCES "permissao"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "grupo_usuario_permisao" ADD CONSTRAINT "grupo_usuario_permisao_grupousuarioId_fkey" FOREIGN KEY ("grupousuarioId") REFERENCES "grupo_usuario"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

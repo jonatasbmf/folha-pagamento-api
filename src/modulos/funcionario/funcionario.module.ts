@@ -5,6 +5,6 @@ import { FuncionarioService } from './funcionario.service';
 @Module({
   controllers: [FuncionarioController],
   providers: [FuncionarioService],
-  exports: [FuncionarioService]
+  exports: [FuncionarioService],
 })
-export class FuncionarioModule { }
+export class FuncionarioModule {}

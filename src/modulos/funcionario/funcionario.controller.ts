@@ -1,11 +1,20 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { CreateFuncionarioDto } from './dto/create-funcionario.dto';
 import { UpdateFuncionarioDto } from './dto/update-funcionario.dto';
 import { FuncionarioService } from './funcionario.service';
 
 @Controller('funcionario')
 export class FuncionarioController {
-  constructor(private readonly funcionarioService: FuncionarioService) { }
+  constructor(private readonly funcionarioService: FuncionarioService) {}
 
   @Post()
   async create(@Body() createFuncionarioDto: CreateFuncionarioDto) {
@@ -19,7 +28,7 @@ export class FuncionarioController {
 
   @Get('buscar/id/:id')
   async findOne(@Param('id') id: string) {
-    return await this.funcionarioService.findById(+id)
+    return await this.funcionarioService.findById(+id);
   }
 
   @Get()
@@ -28,7 +37,10 @@ export class FuncionarioController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateFuncionarioDto: UpdateFuncionarioDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateFuncionarioDto: UpdateFuncionarioDto,
+  ) {
     return await this.funcionarioService.update(+id, updateFuncionarioDto);
   }
 

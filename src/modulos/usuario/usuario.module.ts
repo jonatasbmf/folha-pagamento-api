@@ -7,7 +7,12 @@ import { UsuarioService } from './usuario.service';
 
 @Module({
   controllers: [UsuarioController],
-  providers: [UsuarioService, CreateUsuarioUseCase, UpdateUsuarioUseCase, ValidaSenhaUsuarioUseCase],
-  exports: [UsuarioService]
+  providers: [
+    UsuarioService,
+    CreateUsuarioUseCase,
+    UpdateUsuarioUseCase,
+    ValidaSenhaUsuarioUseCase,
+  ],
+  exports: [UsuarioService],
 })
-export class UsuarioModule { }
+export class UsuarioModule {}

@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 
 import { CreateInssDto } from './dto/create-inss.dto';
 import { UpdateInssDto } from './dto/update-inss.dto';
@@ -6,7 +15,7 @@ import { InssService } from './inss.service';
 
 @Controller('inss')
 export class InssController {
-  constructor(private readonly inssService: InssService) { }
+  constructor(private readonly inssService: InssService) {}
 
   @Post()
   async create(@Body() createInssDto: CreateInssDto) {

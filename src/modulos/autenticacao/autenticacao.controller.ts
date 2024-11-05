@@ -1,10 +1,16 @@
-import { Body, Controller, HttpException, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpException,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
 import { AutenticacaoService } from './autenticacao.service';
 import { AutenticacaoDTO } from './dto/autenticacaoDto';
 
 @Controller('autenticacao')
 export class AutenticacaoController {
-  constructor(private readonly autenticacaoService: AutenticacaoService) { }
+  constructor(private readonly autenticacaoService: AutenticacaoService) {}
 
   @Post('login')
   async autentica(@Body() { email, senha }: AutenticacaoDTO) {

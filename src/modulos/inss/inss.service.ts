@@ -5,14 +5,12 @@ import { UpdateInssDto } from './dto/update-inss.dto';
 
 @Injectable()
 export class InssService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(createInssDto: CreateInssDto) {
-    return await this.prisma.aliquotasInss.create(
-      {
-        data: createInssDto,
-      }
-    );
+    return await this.prisma.aliquotasInss.create({
+      data: createInssDto,
+    });
   }
 
   async findAll() {

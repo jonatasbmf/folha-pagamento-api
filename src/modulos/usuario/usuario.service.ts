@@ -11,7 +11,7 @@ export class UsuarioService {
     private readonly prisma: PrismaService,
     private readonly createUsuarioUseCase: CreateUsuarioUseCase,
     private readonly updateUsuarioUseCase: UpdateUsuarioUseCase,
-  ) { }
+  ) {}
 
   async create(createUsuarioDto: CreateUsuarioDto) {
     return this.createUsuarioUseCase.execute(createUsuarioDto);

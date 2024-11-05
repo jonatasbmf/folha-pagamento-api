@@ -5,19 +5,18 @@ import { UpdateEmpresaDto } from './dto/update-empresa.dto';
 
 @Injectable()
 export class EmpresaService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async findByName(nome: string) {
     return this.prisma.empresa.findMany({
       where: {
-        razao_social: {
+        razaoSocial: {
           contains: nome,
           mode: 'insensitive',
         },
       },
     });
   }
-
 
   async create(createEmpresaDto: CreateEmpresaDto) {
     return this.prisma.empresa.create({
@@ -38,7 +37,7 @@ export class EmpresaService {
   async findOneWithStaff(id: number) {
     return this.prisma.empresa.findUnique({
       where: { id },
-      include: { funcionarios: true }
+      include: { funcionarios: true },
     });
   }
 

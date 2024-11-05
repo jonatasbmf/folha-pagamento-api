@@ -8,6 +8,6 @@ import { CalcularIRRFUseCase } from './userCase/calcularIRRF.usercase';
 @Module({
   controllers: [FolhaPagamentoController],
   providers: [FolhaPagamentoService, CalcularIRRFUseCase, CalcularINSSUseCase],
-  imports: [FuncionarioModule]
+  imports: [FuncionarioModule],
 })
-export class FolhaPagamentoModule { }
+export class FolhaPagamentoModule {}

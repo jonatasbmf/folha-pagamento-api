@@ -1,12 +1,20 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { CreateIrrfDto } from './dto/create-irrf.dto';
 import { UpdateIrrfDto } from './dto/update-irrf.dto';
 import { IrrfService } from './irrf.service';
 
 @Controller('irrf')
 export class IrrfController {
-  constructor(private readonly irrfService: IrrfService) { }
-
+  constructor(private readonly irrfService: IrrfService) {}
 
   @Post()
   async create(@Body() createIrrfDto: CreateIrrfDto) {

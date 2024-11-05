@@ -1,6 +1,6 @@
 export class Empresa {
-    id: number;
-    nome: string;
-    razao_social: string;
-    email: string;
+  id: number;
+  nome: string;
+  razaoSocial: string;
+  email: string;
 }

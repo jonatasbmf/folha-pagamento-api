@@ -5,7 +5,7 @@ import { UpdatePermissaoDto } from './dto/update-permissao.dto';
 
 @Injectable()
 export class PermissaoService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   create(createPermissaoDto: CreatePermissaoDto) {
     return this.prisma.permissao.create({
@@ -37,8 +37,13 @@ export class PermissaoService {
   }
 
   findPorNome(nome: string) {
-    return this.prisma.permissao.findFirst({
-      where: { nome },
+    return this.prisma.permissao.findMany({
+      where: {
+        nome: {
+          contains: nome,
+          mode: 'insensitive',
+        }
+      },
     });
   }
 }

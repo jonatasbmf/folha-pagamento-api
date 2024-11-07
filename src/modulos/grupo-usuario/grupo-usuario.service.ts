@@ -5,7 +5,7 @@ import { UpdateGrupoUsuarioDto } from './dto/update-grupo-usuario.dto';
 
 @Injectable()
 export class GrupoUsuarioService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   create(createGrupoUsuarioDto: CreateGrupoUsuarioDto) {
     return this.prisma.grupoUsuario.create({
@@ -37,8 +37,13 @@ export class GrupoUsuarioService {
   }
 
   buscarPorNome(nome: string) {
-    return this.prisma.grupoUsuario.findFirst({
-      where: { nome },
+    return this.prisma.grupoUsuario.findMany({
+      where: {
+        nome: {
+          contains: nome,
+          mode: 'insensitive',
+        }
+      },
     });
   }
 }

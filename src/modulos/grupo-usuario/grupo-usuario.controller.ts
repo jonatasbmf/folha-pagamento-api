@@ -13,7 +13,7 @@ import { GrupoUsuarioService } from './grupo-usuario.service';
 
 @Controller('grupo-usuario')
 export class GrupoUsuarioController {
-  constructor(private readonly grupoUsuarioService: GrupoUsuarioService) {}
+  constructor(private readonly grupoUsuarioService: GrupoUsuarioService) { }
 
   @Post()
   create(@Body() createGrupoUsuarioDto: CreateGrupoUsuarioDto) {
@@ -30,12 +30,12 @@ export class GrupoUsuarioController {
     return this.grupoUsuarioService.buscarPorNome(nome);
   }
 
-  @Get(':id(\\d+)')
+  @Get(':id')
   findOne(@Param('id') id: string) {
     return this.grupoUsuarioService.findOne(+id);
   }
 
-  @Patch(':id(\\d+)')
+  @Patch(':id')
   update(
     @Param('id') id: string,
     @Body() updateGrupoUsuarioDto: UpdateGrupoUsuarioDto,

@@ -1,14 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { plainToClass } from 'class-transformer';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { Usuario } from './entities/usuario.entity';
 import { UpdateUsuarioUseCase } from './userCase/atualizausuario.usecase';
 import { CreateUsuarioUseCase } from './userCase/criarusuario.usecase';
+import { UsuarioRepositorio } from './usuario.repositorio';
 
 @Injectable()
 export class UsuarioService {
   constructor(
-    private readonly prisma: PrismaService,
+    private readonly usuarioRepositorio: UsuarioRepositorio,
     private readonly createUsuarioUseCase: CreateUsuarioUseCase,
     private readonly updateUsuarioUseCase: UpdateUsuarioUseCase,
   ) { }
@@ -17,40 +19,31 @@ export class UsuarioService {
     return this.createUsuarioUseCase.execute(createUsuarioDto);
   }
 
-  async findAll() {
-    return this.prisma.usuario.findMany();
+  async findAll(): Promise<Usuario[]> {
+    const usuarios = await this.usuarioRepositorio.findAll();
+    return usuarios.map(user => plainToClass(Usuario, user));
   }
 
   async findOne(id: number) {
-    return this.prisma.usuario.findUnique({
-      where: { id },
-    });
+    const user = this.usuarioRepositorio.findOne(id);
+    return plainToClass(Usuario, user);
   }
 
   async findForEmail(email: string) {
-    return this.prisma.usuario.findUnique({
-      where: { email },
-    });
+    const user = this.usuarioRepositorio.findForEmail(email);
+    return plainToClass(Usuario, user);
   }
 
   async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
     return this.updateUsuarioUseCase.execute(id, updateUsuarioDto);
   }
 
-  async remove(id: number) {
-    return this.prisma.usuario.delete({
-      where: { id },
-    });
+  async remove(id: number): Promise<void> {
+    await this.usuarioRepositorio.remove(id);
   }
 
   async listarPorNome(nome: string) {
-    return this.prisma.usuario.findMany({
-      where: {
-        name: {
-          contains: nome,
-          mode: 'insensitive',
-        }
-      }
-    });
+    const usuarios = await this.usuarioRepositorio.listarPorNome(nome);
+    return usuarios.map(user => plainToClass(Usuario, user));
   }
 }

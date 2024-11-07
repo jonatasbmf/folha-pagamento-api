@@ -16,7 +16,7 @@ GET http://localhost:4001/usuario
 ###
 
 ### Get a user by ID
-GET http://localhost:4001/usuario/3
+GET http://localhost:4001/usuario/1
 
 ###
 

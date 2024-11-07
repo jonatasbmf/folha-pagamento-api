@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateUsuarioDto } from '../dto/update-usuario.dto';
 import { Usuario } from '../entities/usuario.entity';
+import { UsuarioRepositorio } from '../usuario.repositorio';
 
 @Injectable()
 export class UpdateUsuarioUseCase {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly usuarioRepositorio: UsuarioRepositorio) { }
 
   async execute(
     id: number,
@@ -21,9 +21,6 @@ export class UpdateUsuarioUseCase {
       data.salt = salt;
     }
 
-    return this.prisma.usuario.update({
-      where: { id },
-      data,
-    });
+    return this.usuarioRepositorio.update(data.id, data);
   }
 }

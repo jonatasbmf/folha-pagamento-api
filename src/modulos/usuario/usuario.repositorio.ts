@@ -1,21 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { UsuarioDto } from './dto/usuario.dto';
 import { Usuario } from './entities/usuario.entity';
-import { UpdateUsuarioUseCase } from './userCase/atualizausuario.usecase';
-import { CreateUsuarioUseCase } from './userCase/criarusuario.usecase';
 
 @Injectable()
 export class UsuarioRepositorio {
     constructor(
-        private readonly prisma: PrismaService,
-        private readonly createUsuarioUseCase: CreateUsuarioUseCase,
-        private readonly updateUsuarioUseCase: UpdateUsuarioUseCase,
+        private readonly prisma: PrismaService
     ) { }
 
-    async create(createUsuarioDto: CreateUsuarioDto) {
-        return this.createUsuarioUseCase.execute(createUsuarioDto);
+    async create(usuarioNovo: UsuarioDto) {
+        return this.prisma.usuario.create({
+            data: usuarioNovo
+        });
     }
 
     async findAll(): Promise<Usuario[]> {
@@ -35,7 +33,10 @@ export class UsuarioRepositorio {
     }
 
     async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
-        return this.updateUsuarioUseCase.execute(id, updateUsuarioDto);
+        return this.prisma.usuario.update({
+            where: { id },
+            data: updateUsuarioDto
+        });
     }
 
     async remove(id: number) {

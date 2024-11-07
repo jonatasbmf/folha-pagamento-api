@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ValidaSenhaUsuarioUseCase } from '../usuario/userCase/validaSenhaUsuario.usecase';
-import { UsuarioService } from '../usuario/usuario.service';
+import { UsuarioRepositorio } from '../usuario/usuario.repositorio';
 
 @Injectable()
 export class AutenticacaoService {
   constructor(
-    private readonly usuario: UsuarioService,
+    private readonly usuarioRepositorio: UsuarioRepositorio,
     private readonly validaSenhaUsuario: ValidaSenhaUsuarioUseCase,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
 
   async login(email: string, senha: string) {
     interface UsuarioPayload {
@@ -17,7 +17,7 @@ export class AutenticacaoService {
       nomeUsuario: string;
     }
 
-    var usuario = await this.usuario.findForEmail(email);
+    var usuario = await this.usuarioRepositorio.findForEmail(email);
 
     if (
       usuario == null ||

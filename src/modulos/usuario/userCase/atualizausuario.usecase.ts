@@ -12,7 +12,7 @@ export class UpdateUsuarioUseCase {
     id: number,
     updateUsuarioDto: UpdateUsuarioDto,
   ): Promise<Usuario> {
-    const data: any = { ...updateUsuarioDto };
+    const data: UpdateUsuarioDto = { ...updateUsuarioDto };
 
     if (updateUsuarioDto.senha) {
       const salt = await bcrypt.genSalt();

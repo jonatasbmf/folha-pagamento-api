@@ -9,12 +9,12 @@ import { UsuarioService } from './usuario.service';
 @Module({
   controllers: [UsuarioController],
   providers: [
+    UsuarioRepositorio,
     UsuarioService,
     CreateUsuarioUseCase,
     UpdateUsuarioUseCase,
     ValidaSenhaUsuarioUseCase,
-    UsuarioRepositorio,
   ],
-  exports: [UsuarioService],
+  exports: [UsuarioRepositorio],
 })
 export class UsuarioModule { }

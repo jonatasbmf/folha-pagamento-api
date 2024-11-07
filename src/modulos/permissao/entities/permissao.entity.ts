@@ -1,5 +1,5 @@
 export class Permissao {
-    id: number;
-    nome: string;
-    descricao: string;
+  id: number;
+  nome: string;
+  descricao: string;
 }

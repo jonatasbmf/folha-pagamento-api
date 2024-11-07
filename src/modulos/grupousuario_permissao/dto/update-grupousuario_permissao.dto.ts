@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateGrupousuarioPermissaoDto } from './create-grupousuario_permissao.dto';
+import { GrupousuarioPermissao } from '../entities/grupousuario_permissao.entity';
 
 export class UpdateGrupousuarioPermissaoDto extends PartialType(
-  CreateGrupousuarioPermissaoDto,
+  GrupousuarioPermissao,
 ) {}

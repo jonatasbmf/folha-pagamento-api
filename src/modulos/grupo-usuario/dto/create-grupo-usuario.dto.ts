@@ -1,4 +1,4 @@
 export class CreateGrupoUsuarioDto {
-    nome: string;
-    descricao: string;
+  nome: string;
+  descricao: string;
 }

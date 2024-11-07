@@ -1,1 +1,4 @@
-export class CreateGrupousuarioPermissaoDto {}
+export class CreateGrupousuarioPermissaoDto {
+  permissaoId: number;
+  grupousuarioId: number;
+}

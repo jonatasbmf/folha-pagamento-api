@@ -1,5 +1,5 @@
 export class GrupoUsuario {
-    id: number;
-    nome: string;
-    descricao: string;
+  id: number;
+  nome: string;
+  descricao: string;
 }

@@ -1,4 +1,4 @@
 export class CreatePermissaoDto {
-    nome: string;
-    descricao: string;
+  nome: string;
+  descricao: string;
 }

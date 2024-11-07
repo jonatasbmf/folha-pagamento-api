@@ -5,11 +5,11 @@ import { UpdateGrupoUsuarioDto } from './dto/update-grupo-usuario.dto';
 
 @Injectable()
 export class GrupoUsuarioService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   create(createGrupoUsuarioDto: CreateGrupoUsuarioDto) {
     return this.prisma.grupoUsuario.create({
-      data: createGrupoUsuarioDto
+      data: createGrupoUsuarioDto,
     });
   }
 
@@ -19,26 +19,26 @@ export class GrupoUsuarioService {
 
   findOne(id: number) {
     return this.prisma.grupoUsuario.findUnique({
-      where: { id }
+      where: { id },
     });
   }
 
   update(id: number, updateGrupoUsuarioDto: UpdateGrupoUsuarioDto) {
     return this.prisma.grupoUsuario.update({
       where: { id },
-      data: updateGrupoUsuarioDto
+      data: updateGrupoUsuarioDto,
     });
   }
 
   remove(id: number) {
     return this.prisma.grupoUsuario.delete({
-      where: { id }
-    })
+      where: { id },
+    });
   }
 
   buscarPorNome(nome: string) {
     return this.prisma.grupoUsuario.findFirst({
-      where: { nome }
+      where: { nome },
     });
   }
 }

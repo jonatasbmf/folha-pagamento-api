@@ -5,14 +5,12 @@ import { UpdatePermissaoDto } from './dto/update-permissao.dto';
 
 @Injectable()
 export class PermissaoService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   create(createPermissaoDto: CreatePermissaoDto) {
-    return this.prisma.permissao.create(
-      {
-        data: createPermissaoDto
-      }
-    );
+    return this.prisma.permissao.create({
+      data: createPermissaoDto,
+    });
   }
 
   findAll() {
@@ -21,26 +19,26 @@ export class PermissaoService {
 
   findOne(id: number) {
     return this.prisma.permissao.findUnique({
-      where: { id }
-    })
+      where: { id },
+    });
   }
 
   update(id: number, updatePermissaoDto: UpdatePermissaoDto) {
     return this.prisma.permissao.update({
       where: { id },
-      data: updatePermissaoDto
+      data: updatePermissaoDto,
     });
   }
 
   remove(id: number) {
     return this.prisma.permissao.delete({
-      where: { id }
+      where: { id },
     });
   }
 
   findPorNome(nome: string) {
     return this.prisma.permissao.findFirst({
-      where: { nome }
+      where: { nome },
     });
   }
 }

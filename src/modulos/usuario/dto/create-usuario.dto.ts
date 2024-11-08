@@ -1,5 +1,6 @@
 export class CreateUsuarioDto {
   email: string;
-  name: string;
+  nome: string;
   senha: string;
+  grupoUsuarioId?: number;
 }

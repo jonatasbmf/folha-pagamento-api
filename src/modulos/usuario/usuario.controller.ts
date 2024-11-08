@@ -35,6 +35,11 @@ export class UsuarioController {
     return this.usuarioService.listarPorNome(nome);
   }
 
+  @Get('buscar/email/:email')
+  listarPorEmail(@Param('email') email: string) {
+    return this.usuarioService.findForEmail(email);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
     return this.usuarioService.update(+id, updateUsuarioDto);

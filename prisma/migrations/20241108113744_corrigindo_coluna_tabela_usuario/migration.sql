@@ -6,5 +6,4 @@
 
 */
 -- AlterTable
-ALTER TABLE "usuario" DROP COLUMN "name",
-ADD COLUMN     "nome" VARCHAR(150) NOT NULL;
+ALTER TABLE "usuario" RENAME COLUMN "name" TO "nome";

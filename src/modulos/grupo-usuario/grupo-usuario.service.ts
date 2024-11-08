@@ -1,49 +1,68 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateGrupoUsuarioDto } from './dto/create-grupo-usuario.dto';
 import { UpdateGrupoUsuarioDto } from './dto/update-grupo-usuario.dto';
+import { GrupoUsuario } from './entities/grupo-usuario.entity';
+import { GrupoUsuarioRepositorio } from './grupo-usuario.repositorio';
+import { GravarGrupoUsuarioAssociarPermissao } from './useCase/gravar-grupo-usuario-associar-permissao.usecase';
 
 @Injectable()
 export class GrupoUsuarioService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly grupoUsuarioRepositorio: GrupoUsuarioRepositorio,
+    private readonly gravarGrupoAssociarPermissaoCasoUso: GravarGrupoUsuarioAssociarPermissao
+  ) { }
 
-  create(createGrupoUsuarioDto: CreateGrupoUsuarioDto) {
-    return this.prisma.grupoUsuario.create({
-      data: createGrupoUsuarioDto,
-    });
+  async create(createGrupoUsuarioDto: CreateGrupoUsuarioDto) {
+    return this.gravarGrupoAssociarPermissaoCasoUso.gravarNovoGrupoAssociarPermissoes(createGrupoUsuarioDto);
   }
 
-  findAll() {
-    return this.prisma.grupoUsuario.findMany();
+  async findAll() {
+    const gruposUsuarios = await this.grupoUsuarioRepositorio.findAll();
+
+    const listaDeGruposDeUsuario: GrupoUsuario[] = gruposUsuarios.map((grupo) => {
+      return {
+        id: grupo.id,
+        nome: grupo.nome,
+        descricao: grupo.descricao,
+        permissoes: grupo.grupoUsuarioPermissao.map((permissao) => permissao.permissaoId),
+      };
+    });
+
+    return listaDeGruposDeUsuario;
   }
 
-  findOne(id: number) {
-    return this.prisma.grupoUsuario.findUnique({
-      where: { id },
-    });
+  async findOne(id: number) {
+    const grupoUsuario = await this.grupoUsuarioRepositorio.findOne(id);
+
+    const grupoUsuarioComPermissoes: GrupoUsuario = {
+      id: grupoUsuario.id,
+      nome: grupoUsuario.nome,
+      descricao: grupoUsuario.descricao,
+      permissoes: grupoUsuario.grupoUsuarioPermissao.map((permissao) => permissao.permissaoId)
+    }
+
+    return grupoUsuarioComPermissoes;
   }
 
-  update(id: number, updateGrupoUsuarioDto: UpdateGrupoUsuarioDto) {
-    return this.prisma.grupoUsuario.update({
-      where: { id },
-      data: updateGrupoUsuarioDto,
-    });
+  async update(id: number, updateGrupoUsuarioDto: UpdateGrupoUsuarioDto) {
+    return this.gravarGrupoAssociarPermissaoCasoUso.atualizarGrupoAssociarPermissoes(id, updateGrupoUsuarioDto);
   }
 
-  remove(id: number) {
-    return this.prisma.grupoUsuario.delete({
-      where: { id },
-    });
+  async remove(id: number) {
+    return this.grupoUsuarioRepositorio.remove(id);
   }
 
-  buscarPorNome(nome: string) {
-    return this.prisma.grupoUsuario.findMany({
-      where: {
-        nome: {
-          contains: nome,
-          mode: 'insensitive',
-        }
-      },
+  async buscarPorNome(nome: string) {
+    const gruposUsuarios = await this.grupoUsuarioRepositorio.buscarPorNome(nome);
+
+    const listaDeGruposDeUsuario: GrupoUsuario[] = gruposUsuarios.map((grupo) => {
+      return {
+        id: grupo.id,
+        nome: grupo.nome,
+        descricao: grupo.descricao,
+        permissoes: grupo.grupoUsuarioPermissao.map((permissao) => permissao.permissaoId),
+      };
     });
+
+    return listaDeGruposDeUsuario;
   }
 }

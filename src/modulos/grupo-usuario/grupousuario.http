@@ -1,0 +1,7 @@
+GET http://localhost:4001/grupo-usuario
+
+###
+PATCH http://localhost:4001/grupo-usuario/1
+Content-Type: application/json
+
+{"id":1,"nome":"Sysadmin","descricao":"Administrador do sistema","permissoes":[1,4]}

@@ -9,7 +9,7 @@ import { AutenticacaoService } from './autenticacao.service';
 
 @Module({
   controllers: [AutenticacaoController],
-  providers: [AutenticacaoService, ValidaSenhaUsuarioUseCase],
+  providers: [AutenticacaoService, ValidaSenhaUsuarioUseCase,],
   imports: [
     UsuarioModule,
     GrupoUsuarioModule,
@@ -25,4 +25,4 @@ import { AutenticacaoService } from './autenticacao.service';
     }),
   ],
 })
-export class AutenticacaoModule {}
+export class AutenticacaoModule { }

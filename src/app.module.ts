@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AutenticacaoModule } from './modulos/autenticacao/autenticacao.module';
+import { AutorizacaoModule } from './modulos/autorizacao/autorizacao.module';
 import { EmpresaModule } from './modulos/empresa/empresa.module';
 import { FolhaPagamentoModule } from './modulos/folha-pagamento/folha-pagamento.module';
 import { FuncionarioModule } from './modulos/funcionario/funcionario.module';
@@ -25,6 +26,7 @@ import { PrismaModule } from './prisma/prisma.module';
     IrrfModule,
     FolhaPagamentoModule,
     AutenticacaoModule,
+    AutorizacaoModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -32,4 +34,4 @@ import { PrismaModule } from './prisma/prisma.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }

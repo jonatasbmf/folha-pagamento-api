@@ -12,9 +12,14 @@ export class UsuarioRepositorio {
 
     async create(usuarioNovo: UsuarioDto) {
         return this.prisma.usuario.create({
-            data: usuarioNovo,
-            include: {
-                grupoUsuario: true
+            data: {
+                nome: usuarioNovo.nome,
+                email: usuarioNovo.email,
+                senha: usuarioNovo.senha,
+                salt: usuarioNovo.salt,
+                grupoUsuario: {
+                    connect: { id: usuarioNovo.grupoUsuarioId },
+                }
             }
         });
     }
@@ -48,7 +53,15 @@ export class UsuarioRepositorio {
     async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
         return this.prisma.usuario.update({
             where: { id },
-            data: updateUsuarioDto
+            data: {
+                nome: updateUsuarioDto.nome,
+                email: updateUsuarioDto.email,
+                senha: updateUsuarioDto.senha,
+                salt: updateUsuarioDto.salt,
+                grupoUsuario: {
+                    connect: { id: updateUsuarioDto.grupoUsuarioId },
+                }
+            }
         });
     }
 

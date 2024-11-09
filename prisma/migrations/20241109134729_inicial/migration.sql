@@ -2,10 +2,10 @@
 CREATE TABLE "usuario" (
     "id" SERIAL NOT NULL,
     "email" VARCHAR(150) NOT NULL,
-    "name" VARCHAR(150) NOT NULL,
+    "nome" VARCHAR(150) NOT NULL,
     "senha" VARCHAR(255) NOT NULL,
     "salt" VARCHAR(255) NOT NULL,
-    "grupousuarioId" INTEGER NOT NULL,
+    "grupousuarioId" INTEGER,
 
     CONSTRAINT "usuario_pkey" PRIMARY KEY ("id")
 );
@@ -75,7 +75,7 @@ CREATE TABLE "permissao" (
 CREATE TABLE "grupo_usuario_permisao" (
     "id" SERIAL NOT NULL,
     "permissaoId" INTEGER NOT NULL,
-    "grupousuarioId" INTEGER NOT NULL,
+    "grupoUsuarioId" INTEGER NOT NULL,
 
     CONSTRAINT "grupo_usuario_permisao_pkey" PRIMARY KEY ("id")
 );
@@ -84,7 +84,7 @@ CREATE TABLE "grupo_usuario_permisao" (
 CREATE UNIQUE INDEX "usuario_email_key" ON "usuario"("email");
 
 -- AddForeignKey
-ALTER TABLE "usuario" ADD CONSTRAINT "usuario_grupousuarioId_fkey" FOREIGN KEY ("grupousuarioId") REFERENCES "grupo_usuario"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "usuario" ADD CONSTRAINT "usuario_grupousuarioId_fkey" FOREIGN KEY ("grupousuarioId") REFERENCES "grupo_usuario"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "funcionario" ADD CONSTRAINT "funcionario_empresaId_fkey" FOREIGN KEY ("empresaId") REFERENCES "empresa"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -93,4 +93,4 @@ ALTER TABLE "funcionario" ADD CONSTRAINT "funcionario_empresaId_fkey" FOREIGN KE
 ALTER TABLE "grupo_usuario_permisao" ADD CONSTRAINT "grupo_usuario_permisao_permissaoId_fkey" FOREIGN KEY ("permissaoId") REFERENCES "permissao"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "grupo_usuario_permisao" ADD CONSTRAINT "grupo_usuario_permisao_grupousuarioId_fkey" FOREIGN KEY ("grupousuarioId") REFERENCES "grupo_usuario"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "grupo_usuario_permisao" ADD CONSTRAINT "grupo_usuario_permisao_grupoUsuarioId_fkey" FOREIGN KEY ("grupoUsuarioId") REFERENCES "grupo_usuario"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

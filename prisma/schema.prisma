@@ -20,8 +20,8 @@ model usuario {
   nome           String        @db.VarChar(150)
   senha          String        @db.VarChar(255)
   salt           String        @db.VarChar(255)
-  grupousuarioId Int?
-  grupoUsuario   grupoUsuario? @relation(fields: [grupousuarioId], references: [id])
+  grupoUsuarioId Int?
+  grupoUsuario   grupoUsuario? @relation(fields: [grupoUsuarioId], references: [id])
 }
 
 model aliquotasInss {
@@ -80,7 +80,7 @@ model grupoUsuarioPermissao {
   id             Int          @id @default(autoincrement())
   permissaoId    Int
   permissao      permissao    @relation(fields: [permissaoId], references: [id])
-  grupoUsuarioId Int          @map("grupousuarioId")
+  grupoUsuarioId Int
   grupoUsuario   grupoUsuario @relation(fields: [grupoUsuarioId], references: [id])
 
   @@map("grupo_usuario_permisao")

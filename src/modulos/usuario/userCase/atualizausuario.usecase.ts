@@ -26,8 +26,6 @@ export class UpdateUsuarioUseCase {
       data.salt = salt;
     }
 
-    console.info("Objeto montado: ", data);
-
     return this.usuarioRepositorio.update(id, data);
   }
 }

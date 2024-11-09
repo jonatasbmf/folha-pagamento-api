@@ -3,4 +3,5 @@ export class Funcionario {
   nome: string;
   salario: number;
   empresaId: number;
+  deducao: number;
 }

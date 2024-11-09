@@ -4,4 +4,5 @@ export class UpdateInssDto {
   faixaMin: number;
   faixaMax: number;
   aliquota: number;
+  deducao: number;
 }

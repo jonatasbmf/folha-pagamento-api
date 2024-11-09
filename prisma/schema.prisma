@@ -29,6 +29,7 @@ model aliquotasInss {
   ano      Int
   faixaMin Decimal  @map("faixa_min") @db.Decimal(12, 2)
   faixaMax Decimal? @map("faixa_max") @db.Decimal(12, 2)
+  deducao  Decimal  @default(0) @db.Decimal(12, 2)
   aliquota Decimal  @db.Decimal(12, 2)
 }
 
@@ -53,6 +54,7 @@ model funcionario {
   id        Int     @id @default(autoincrement())
   nome      String  @db.VarChar(150)
   salario   Decimal @db.Decimal(12, 2)
+  deducao   Decimal @default(0) @db.Decimal(12, 2)
   empresaId Int
   empresa   empresa @relation(fields: [empresaId], references: [id])
 }

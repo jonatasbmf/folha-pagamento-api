@@ -3,4 +3,5 @@ export class CreateInssDto {
   faixaMin: number;
   faixaMax: number;
   aliquota: number;
+  deducao: number;
 }

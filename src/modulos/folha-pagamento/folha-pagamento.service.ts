@@ -9,15 +9,16 @@ export class FolhaPagamentoService {
     private readonly funcionarioService: FuncionarioService,
     private readonly calcularIRRFUseCase: CalcularIRRFUseCase,
     private readonly calcularINSSUseCase: CalcularINSSUseCase,
-  ) {}
+  ) { }
 
   async calcularFolhaPagamento(idFuncionario: string) {
     var funcionario = await this.funcionarioService.findById(+idFuncionario);
     var salario = +funcionario.salario;
     var nome = funcionario.nome;
+    var deducaoIrrf = +funcionario.deducao;
 
     var inss = await this.calcularInss(salario);
-    var irrf = await this.calcularIrrf(+salario, +inss);
+    var irrf = await this.calcularIrrf(+salario, +inss, deducaoIrrf);
 
     return { nome, salario, inss, irrf };
   }
@@ -29,10 +30,11 @@ export class FolhaPagamentoService {
     );
   }
 
-  async calcularIrrf(salario: number, inss: number) {
+  async calcularIrrf(salario: number, inss: number, dedusaoIrrf: number) {
     return this.calcularIRRFUseCase.calcularIRRF(
       salario,
       inss,
+      dedusaoIrrf,
       new Date().getFullYear(),
     );
   }

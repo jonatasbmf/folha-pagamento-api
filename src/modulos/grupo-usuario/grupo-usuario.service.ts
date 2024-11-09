@@ -48,7 +48,8 @@ export class GrupoUsuarioService {
   }
 
   async remove(id: number) {
-    return this.grupoUsuarioRepositorio.remove(id);
+    await this.grupoUsuarioRepositorio.removeVinculoComPermissao(id);
+    await this.grupoUsuarioRepositorio.remove(id);
   }
 
   async buscarPorNome(nome: string) {

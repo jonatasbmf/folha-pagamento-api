@@ -1,6 +1,9 @@
 GET http://localhost:4001/grupo-usuario
 
 ###
+GET http://localhost:4001/grupo-usuario/1
+
+###
 PATCH http://localhost:4001/grupo-usuario/1
 Content-Type: application/json
 

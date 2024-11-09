@@ -43,6 +43,12 @@ export class GrupoUsuarioRepositorio {
         });
     }
 
+    async removeVinculoComPermissao(id: number) {
+        await this.prisma.grupoUsuarioPermissao.deleteMany({
+            where: { grupoUsuarioId: id },
+        })
+    }
+
     async buscarPorNome(nome: string) {
         return this.prisma.grupoUsuario.findMany({
             where: {

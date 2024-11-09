@@ -12,7 +12,12 @@ export class UpdateUsuarioUseCase {
     id: number,
     updateUsuarioDto: UpdateUsuarioDto,
   ): Promise<Usuario> {
-    const data: UpdateUsuarioDto = { ...updateUsuarioDto };
+
+    const data: UpdateUsuarioDto = {
+      nome: updateUsuarioDto.nome,
+      email: updateUsuarioDto.email,
+      grupoUsuarioId: updateUsuarioDto.grupoUsuarioId
+    };
 
     if (updateUsuarioDto.senha) {
       const salt = await bcrypt.genSalt();
@@ -21,6 +26,8 @@ export class UpdateUsuarioUseCase {
       data.salt = salt;
     }
 
-    return this.usuarioRepositorio.update(data.id, data);
+    console.info("Objeto montado: ", data);
+
+    return this.usuarioRepositorio.update(id, data);
   }
 }

@@ -42,7 +42,11 @@ export class UsuarioController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
-    return this.usuarioService.update(+id, updateUsuarioDto);
+    try {
+      return this.usuarioService.update(+id, updateUsuarioDto);
+    } catch (error) {
+      throw error
+    }
   }
 
   @Delete(':id')

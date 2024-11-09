@@ -1,4 +1,4 @@
 export class CreateGrupousuarioPermissaoDto {
   permissaoId: number;
-  grupousuarioId: number;
+  grupoUsuarioId: number;
 }

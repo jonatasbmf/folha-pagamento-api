@@ -1,5 +1,5 @@
 export class GrupousuarioPermissao {
-  id: number;
+  id?: number;
   permissaoId: number;
-  grupousuarioId: number;
+  grupoUsuarioId: number;
 }

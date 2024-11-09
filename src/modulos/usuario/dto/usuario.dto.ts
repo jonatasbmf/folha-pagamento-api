@@ -4,4 +4,5 @@ export class UsuarioDto {
   nome: string;
   senha: string;
   salt: string;
+  grupoUsuarioId?: number
 }

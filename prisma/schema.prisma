@@ -80,8 +80,8 @@ model grupoUsuarioPermissao {
   id             Int          @id @default(autoincrement())
   permissaoId    Int
   permissao      permissao    @relation(fields: [permissaoId], references: [id])
-  grupousuarioId Int
-  grupoUsuario   grupoUsuario @relation(fields: [grupousuarioId], references: [id])
+  grupoUsuarioId Int          @map("grupousuarioId")
+  grupoUsuario   grupoUsuario @relation(fields: [grupoUsuarioId], references: [id])
 
   @@map("grupo_usuario_permisao")
 }

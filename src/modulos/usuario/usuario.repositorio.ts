@@ -48,8 +48,7 @@ export class UsuarioRepositorio {
     async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
         return this.prisma.usuario.update({
             where: { id },
-            data: updateUsuarioDto,
-            include: { grupoUsuario: true }
+            data: updateUsuarioDto
         });
     }
 
